@@ -1,0 +1,1374 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Multiverse</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flickity/2.3.0/flickity.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <style>
+
+ @font-face {
+            font-family: myfont;
+            src: url(/static/LEMONMILK-Light.otf);
+        }
+
+    body {
+        background: linear-gradient(106deg, rgb(39, 16, 16) 0%, rgb(11, 14, 27) 63%, rgb(35, 11, 28) 100%);
+        
+      color: #f8f9fa;
+      font-family: myfont;
+      font-weight: bold;
+      letter-spacing: 1px;
+      
+    }
+    .navbar {
+    background: transparent;
+    
+    
+    padding: 0.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 999;
+    transition: background 0.3s ease; /* Smooth transition for background color */
+}
+
+
+        .navbar .nav-link {
+            color: #ffffff;
+            font-weight: 500;
+            margin:10px;
+            
+        }
+
+        .navbar .nav-link:hover {
+            color: #ff4757;
+        }
+
+        .navbar-toggler {
+            border-color: rgba(255, 255, 255, 0.1);
+            
+            
+        
+    
+        }
+        
+
+        .navbar-brand {
+            font-weight: 500;
+            color: #ffffff;
+            
+        }
+        
+
+.icon-menu {
+  --gap: 5px;
+  --height-bar: 2.5px;
+  --pos-y-bar-one: 0;
+  --pos-y-bar-three: 0;
+  --scale-bar: 1;
+  --rotate-bar-one: 0;
+  --rotate-bar-three: 0;
+  width: 25px;
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap);
+  cursor: pointer;
+  position: relative;
+  margin-top:-1px;
+  margin-right: 10px;
+  display:none;
+}
+@media (max-width: 767px) {
+            .icon-menu {
+                display: flex; 
+            }
+        }
+       
+.bar {
+  position: relative;
+  height: 3.2px;
+  width: 100%;
+  border-radius: .5rem;
+  background-color: #d6d6d6;
+}
+
+.bar--1 {
+  top: var(--pos-y-bar-one);
+  transform: rotate(var(--rotate-bar-one));
+  transition: top 200ms 100ms, transform 100ms;
+}
+
+.bar--2 {
+  transform: scaleX(var(--scale-bar));
+  transition: transform 150ms 100ms;
+}
+
+.bar--3 {
+  bottom: var(--pos-y-bar-three);
+  transform: rotate(var(--rotate-bar-three));
+  transition: bottom 200ms 100ms, transform 100ms;
+}
+
+.check-icon:checked + .icon-menu > .bar--1 {
+  transition: top 200ms, transform 200ms 100ms;
+}
+
+.check-icon:checked + .icon-menu > .bar--3 {
+  transition: bottom 200ms, transform 200ms 100ms;
+}
+
+.check-icon:checked + .icon-menu {
+  --pos-y-bar-one: calc(var(--gap) + var(--height-bar));
+  --pos-y-bar-three: calc(var(--gap) + var(--height-bar));
+  --scale-bar: 0;
+  --rotate-bar-one: 45deg;
+  --rotate-bar-three: -45deg;
+}
+@media (min-width: 768px) and (max-width: 1024px) {
+    .icon-menu{
+        display: block;
+        
+        
+    }
+    .bar {
+  position: relative;
+  height: 5px;
+  width: 100%;
+  border-radius: .5rem;
+  background-color: #d6d6d6;
+  margin:2px;
+}
+
+.bar--1 {
+  top: var(--pos-y-bar-one);
+  transform: rotate(var(--rotate-bar-one));
+  transition: top 200ms 100ms, transform 100ms;
+}
+
+.bar--2 {
+  transform: scaleX(var(--scale-bar));
+  transition: transform 150ms 100ms;
+}
+
+.bar--3 {
+  bottom: var(--pos-y-bar-three);
+  transform: rotate(var(--rotate-bar-three));
+  transition: bottom 200ms 100ms, transform 100ms;
+}
+
+.check-icon:checked + .icon-menu > .bar--1 {
+  transition: top 200ms, transform 200ms 100ms;
+}
+
+.check-icon:checked + .icon-menu > .bar--3 {
+  transition: bottom 200ms, transform 200ms 100ms;
+}
+
+.check-icon:checked + .icon-menu {
+  --pos-y-bar-one: calc(var(--gap) + var(--height-bar));
+  --pos-y-bar-three: calc(var(--gap) + var(--height-bar));
+  --scale-bar: 0;
+  --rotate-bar-one: 45deg;
+  --rotate-bar-three: -45deg;
+}
+    }
+
+
+</style>
+  </style>
+</head>
+<body>
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg navbar-dark">
+    <p class="text-center" style="font-weight: bold;font-size: 1.5rem;margin-left: 15px;margin-top: 10px;"> our products</p>
+    <input hidden class="check-icon" id="check-icon" name="check-icon" type="checkbox" >
+    <label class="icon-menu" for="check-icon" data-toggle="collapse" data-target="#navbarNav">
+        <div class="bar bar--1"></div>
+        <div class="bar bar--2"></div>
+        <div class="bar bar--3"></div>
+    </label>
+
+    <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ml-auto" >
+            <li class="nav-item ml-4"><a class="nav-link" href="">Products</a></li>
+            <li class="nav-item ml-4"><a class="nav-link" href="">Custom</a></li>
+            <li class="nav-item ml-4"><a class="nav-link" href="">Contact Us</a></li>
+            <li class="nav-item ml-4"><a class="nav-link" href="">Designs</a></li>
+
+        </ul>
+    </div>
+</nav>
+<script>
+    // Navbar background color change on scroll or menu toggle
+function updateNavbarBackground() {
+  const navbar = document.querySelector(".navbar");
+  const menuCheckbox = document.querySelector("#check-icon");
+
+  if (menuCheckbox.checked || window.scrollY > 50) {
+    navbar.style.background = "rgba(0, 0, 0, 0.363)"; // Light transparent background for contrast
+    navbar.style.backdropFilter = "blur(10px)";
+    navbar.style.webkitBackdropFilter = "blur(10px)";
+    navbar.style.transition = "background 0.3s ease, backdrop-filter 0.3s ease"; // Smooth transition
+  } else {
+    navbar.style.background = "transparent";
+    navbar.style.backdropFilter = "none";
+    navbar.style.webkitBackdropFilter = "none";
+  }
+}
+
+// Attach scroll event listener
+window.addEventListener("scroll", updateNavbarBackground);
+
+// Attach toggle menu listener
+document.querySelector("#check-icon").addEventListener("change", updateNavbarBackground);
+
+  </script>
+
+<div style="display:flex;align-items:center;justify-content: center;margin-top: 100px;margin-bottom: 40px;">
+    <style>
+        .grid {
+  height: 500vh;
+  width:100vw;
+  background-image: linear-gradient(to right, #0f0f10 1px, transparent 1px),
+    linear-gradient(to bottom, #0f0f10 1px, transparent 1px);
+  background-size: 1rem 1rem;
+  background-position: center center;
+  position: absolute;
+  z-index: -1;
+  filter: blur(1px);
+}
+.white,
+.border,
+.darkBorderBg,
+.glow {
+  max-height: 70px;
+  max-width: 314px;
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  overflow: hidden;
+  z-index: -1;
+  /* Border Radius */
+  border-radius: 12px;
+  filter: blur(3px);
+ 
+}
+.input {
+  background-color: #010201;
+  border: none;
+  /* padding:7px; */
+  width: 301px;
+  height: 56px;
+  border-radius: 10px;
+  color: white;
+  padding-inline: 59px;
+  font-size: 18px;
+}
+#poda {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.input::placeholder {
+  color: #c0b9c0;
+}
+
+.input:focus {
+  outline: none;
+}
+
+#main:focus-within > #input-mask {
+  display: none;
+}
+
+#input-mask {
+  pointer-events: none;
+  width: 100px;
+  height: 20px;
+  position: absolute;
+  background: linear-gradient(90deg, transparent, black);
+  top: 18px;
+  left: 70px;
+}
+#pink-mask {
+  pointer-events: none;
+  width: 30px;
+  height: 20px;
+  position: absolute;
+  background: #79d2d8;
+  top: 10px;
+  left: 5px;
+  filter: blur(20px);
+  opacity: 0.8;
+  //animation:leftright 4s ease-in infinite;
+  transition: all 2s;
+}
+#main:hover > #pink-mask {
+  //animation: rotate 4s linear infinite;
+  opacity: 0;
+}
+
+.white {
+  max-height: 63px;
+  max-width: 307px;
+  border-radius: 10px;
+  filter: blur(2px);
+}
+
+.white::before {
+  content: "";
+  z-index: -2;
+  text-align: center;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) rotate(83deg);
+  position: absolute;
+  width: 600px;
+  height: 600px;
+  background-repeat: no-repeat;
+  background-position: 0 0;
+  filter: brightness(1.4);
+  background-image: conic-gradient(
+    rgba(0, 0, 0, 0) 0%,
+    #a099d8,
+    rgba(0, 0, 0, 0) 8%,
+    rgba(0, 0, 0, 0) 50%,
+    #a2bbdf,
+    rgba(0, 0, 0, 0) 58%
+  );
+  //  animation: rotate 4s linear infinite;
+  transition: all 2s;
+}
+.border {
+  max-height: 59px;
+  max-width: 303px;
+  border-radius: 11px;
+  filter: blur(0.5px);
+}
+.border::before {
+  content: "";
+  z-index: -2;
+  text-align: center;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) rotate(70deg);
+  position: absolute;
+  width: 600px;
+  height: 600px;
+  filter: brightness(1.3);
+  background-repeat: no-repeat;
+  background-position: 0 0;
+  background-image: conic-gradient(
+    #1c191c,
+    #402fb5 5%,
+    #1c191c 14%,
+    #1c191c 50%,
+    #cf30aa 60%,
+    #1c191c 64%
+  );
+  // animation: rotate 4s 0.1s linear infinite;
+  transition: all 2s;
+}
+.darkBorderBg {
+  max-height: 65px;
+  max-width: 312px;
+}
+.darkBorderBg::before {
+  content: "";
+  z-index: -2;
+  text-align: center;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) rotate(82deg);
+  position: absolute;
+  width: 600px;
+  height: 600px;
+  background-repeat: no-repeat;
+  background-position: 0 0;
+  background-image: conic-gradient(
+    rgba(0, 0, 0, 0),
+    #6a1111,
+    rgba(0, 0, 0, 0) 10%,
+    rgba(0, 0, 0, 0) 50%,
+    #6e5f1b,
+    rgba(0, 0, 0, 0) 60%
+  );
+  transition: all 2s;
+}
+#poda:hover > .darkBorderBg::before {
+  transform: translate(-50%, -50%) rotate(262deg);
+}
+#poda:hover > .glow::before {
+  transform: translate(-50%, -50%) rotate(240deg);
+}
+#poda:hover > .white::before {
+  transform: translate(-50%, -50%) rotate(263deg);
+}
+#poda:hover > .border::before {
+  transform: translate(-50%, -50%) rotate(250deg);
+}
+
+#poda:hover > .darkBorderBg::before {
+  transform: translate(-50%, -50%) rotate(-98deg);
+}
+#poda:hover > .glow::before {
+  transform: translate(-50%, -50%) rotate(-120deg);
+}
+#poda:hover > .white::before {
+  transform: translate(-50%, -50%) rotate(-97deg);
+}
+#poda:hover > .border::before {
+  transform: translate(-50%, -50%) rotate(-110deg);
+}
+
+#poda:focus-within > .darkBorderBg::before {
+  transform: translate(-50%, -50%) rotate(442deg);
+  transition: all 4s;
+}
+#poda:focus-within > .glow::before {
+  transform: translate(-50%, -50%) rotate(420deg);
+  transition: all 4s;
+}
+#poda:focus-within > .white::before {
+  transform: translate(-50%, -50%) rotate(443deg);
+  transition: all 4s;
+}
+#poda:focus-within > .border::before {
+  transform: translate(-50%, -50%) rotate(430deg);
+  transition: all 4s;
+}
+
+.glow {
+  overflow: hidden;
+  filter: blur(30px);
+  opacity: 0.4;
+  max-height: 130px;
+  max-width: 354px;
+}
+.glow:before {
+  content: "";
+  z-index: -2;
+  text-align: center;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) rotate(60deg);
+  position: absolute;
+  width: 999px;
+  height: 999px;
+  background-repeat: no-repeat;
+  background-position: 0 0;
+  /*border color, change middle color*/
+  background-image: conic-gradient(
+    #000,
+    #b52f2f 5%,
+    #000 38%,
+    #000 50%,
+    #cacf30 60%,
+    #000 87%
+  );
+  /* change speed here */
+  //animation: rotate 4s 0.3s linear infinite;
+  transition: all 2s;
+}
+
+@keyframes rotate {
+  100% {
+    transform: translate(-50%, -50%) rotate(450deg);
+  }
+}
+@keyframes leftright {
+  0% {
+    transform: translate(0px, 0px);
+    opacity: 1;
+  }
+
+  49% {
+    transform: translate(250px, 0px);
+    opacity: 0;
+  }
+  80% {
+    transform: translate(-40px, 0px);
+    opacity: 0;
+  }
+
+  100% {
+    transform: translate(0px, 0px);
+    opacity: 1;
+  }
+}
+
+#filter-icon {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2;
+  max-height: 40px;
+  max-width: 38px;
+  height: 100%;
+  width: 100%;
+
+  isolation: isolate;
+  overflow: hidden;
+  /* Border Radius */
+  border-radius: 10px;
+  background: linear-gradient(180deg, #161329, black, #1d1b4b);
+  border: 1px solid transparent;
+}
+.filterBorder {
+  height: 42px;
+  width: 40px;
+  position: absolute;
+  overflow: hidden;
+  top: 7px;
+  right: 7px;
+  border-radius: 10px;
+}
+
+.filterBorder::before {
+  content: "";
+
+  text-align: center;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) rotate(90deg);
+  position: absolute;
+  width: 600px;
+  height: 600px;
+  background-repeat: no-repeat;
+  background-position: 0 0;
+  filter: brightness(1.35);
+  background-image: conic-gradient(
+    rgba(0, 0, 0, 0),
+    #3d3a4f,
+    rgba(0, 0, 0, 0) 50%,
+    rgba(0, 0, 0, 0) 50%,
+    #3d3a4f,
+    rgba(0, 0, 0, 0) 100%
+  );
+  animation: rotate 4s linear infinite;
+}
+#main {
+  position: relative;
+}
+#search-icon {
+  position: absolute;
+  left: 20px;
+  top: 15px;
+}
+
+    </style>
+    <!-- From Uiverse.io by Lakshay-art --> 
+<div class="grid"></div>
+<div id="poda">
+  <div class="glow"></div>
+  <div class="darkBorderBg"></div>
+  <div class="darkBorderBg"></div>
+  <div class="darkBorderBg"></div>
+
+  <div class="white"></div>
+
+  <div class="border"></div>
+
+  <div id="main">
+    <input placeholder="Search..." type="text" name="text" class="input" />
+    <div id="input-mask"></div>
+    <div id="pink-mask"></div>
+    <div class="filterBorder"></div>
+    <div id="filter-icon">
+      <svg
+        preserveAspectRatio="none"
+        height="27"
+        width="27"
+        viewBox="4.8 4.56 14.832 15.408"
+        fill="none"
+      >
+        <path
+          d="M8.16 6.65002H15.83C16.47 6.65002 16.99 7.17002 16.99 7.81002V9.09002C16.99 9.56002 16.7 10.14 16.41 10.43L13.91 12.64C13.56 12.93 13.33 13.51 13.33 13.98V16.48C13.33 16.83 13.1 17.29 12.81 17.47L12 17.98C11.24 18.45 10.2 17.92 10.2 16.99V13.91C10.2 13.5 9.97 12.98 9.73 12.69L7.52 10.36C7.23 10.08 7 9.55002 7 9.20002V7.87002C7 7.17002 7.52 6.65002 8.16 6.65002Z"
+          stroke="#d6d6e6"
+          stroke-width="1"
+          stroke-miterlimit="10"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        ></path>
+      </svg>
+    </div>
+    <div id="search-icon">
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="24"
+        viewBox="0 0 24 24"
+        stroke-width="2"
+        stroke-linejoin="round"
+        stroke-linecap="round"
+        height="24"
+        fill="none"
+        class="feather feather-search"
+      >
+        <circle stroke="url(#search)" r="8" cy="11" cx="11"></circle>
+        <line
+          stroke="url(#searchl)"
+          y2="16.65"
+          y1="22"
+          x2="16.65"
+          x1="22"
+        ></line>
+        <defs>
+          <linearGradient gradientTransform="rotate(50)" id="search">
+            <stop stop-color="#f8e7f8" offset="0%"></stop>
+            <stop stop-color="#b6a9b7" offset="50%"></stop>
+          </linearGradient>
+          <linearGradient id="searchl">
+            <stop stop-color="#b6a9b7" offset="0%"></stop>
+            <stop stop-color="#837484" offset="50%"></stop>
+          </linearGradient>
+        </defs>
+      </svg>
+    </div>
+  </div>
+</div>
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const searchInput = document.querySelector(".input");
+    const products = document.querySelectorAll(".content-area .single-content");
+
+    searchInput.addEventListener("input", function () {
+        const searchTerm = searchInput.value.toLowerCase();
+
+        products.forEach(product => {
+            const productText = product.textContent.toLowerCase();
+
+            if (productText.includes(searchTerm)) {
+                product.style.display = "flex";
+            } else {
+                product.style.display = "none";
+            }
+        });
+    });
+});
+
+</script>
+</div>
+<style>
+    .tabs {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.tab {
+    background: transparent;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    font-size: 14px;
+    color: white;
+    font-family: myfont;
+    transition: color 0.3s ease, border-bottom 0.3s ease;
+    outline: none;
+    text-decoration: none;
+}
+
+.tab.active {
+    border: none;
+    border-bottom: 2px solid blue;
+    color: blue;
+    text-decoration: none;
+}
+
+.tab:hover {
+    color: blue; /* Text color change on hover */
+    text-decoration: none;
+}
+</style>
+<div class="tabs">
+    <a href="#" class="tab" data-category="thrifted">THRIFTED</a>
+    <a href="#" class="tab active" data-category="all">COLLECTIONS</a>
+    <a href="#" class="tab" data-category="trending">TRENDING</a>
+</div><br>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+      // Get all tab elements
+      const tabs = document.querySelectorAll(".tab");
+      const products = document.querySelectorAll(".content-area");
+  
+      tabs.forEach(tab => {
+          tab.addEventListener("click", function (event) {
+              event.preventDefault();
+  
+              // Remove 'active' class from all tabs and add to the clicked one
+              tabs.forEach(t => t.classList.remove("active"));
+              this.classList.add("active");
+  
+              // Get the selected category
+              const category = this.getAttribute("data-category");
+  
+              // Loop through products and filter based on category
+              products.forEach(product => {
+                  const productCategory = product.querySelector(".view-product-btn").getAttribute("data-cat");
+  
+                  if (category === "all" || productCategory === category) {
+                      product.style.display = "flex"; // Show matching products
+                  } else {
+                      product.style.display = "none"; // Hide non-matching products
+                  }
+              });
+          });
+      });
+  });
+  </script>
+  
+<style>
+    .content-area {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-wrap: wrap;
+        flex-direction: row;
+        padding: 10px 0;
+    }
+
+    .single-content {
+        width: 400px;
+        height: 400px;
+        margin:10px;
+        overflow: hidden;
+        position: relative;
+        box-shadow: 0 2px 15px rgba(0, 0, 0, 0.2);
+        border-radius: 15px; 
+        margin-top: -20px;
+    }
+
+    /* Overlay always visible */
+    .single-content::after {
+        content: '';
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        top: 0;
+        left: 0;
+        background: linear-gradient(35deg, rgba(0, 0, 0, 0.8) 25%, rgba(0, 0, 0, 0));
+        z-index: 2;
+        opacity: 1;
+    }
+
+    .single-content img {
+        object-fit: cover;
+        min-height: 100%;
+        height: 100%;
+        transition: all 0.5s ease;
+        width: 100%;
+        
+    }
+
+    .single-content:hover img {
+        transform: scale(1.3) translate(10%, 10%);
+    }
+
+    /* Info box always visible */
+    .single-content .info {
+        position: absolute;
+        z-index: 3;
+        opacity: 1;
+        overflow: hidden;
+        left: 5%;
+        right: 5%;
+        bottom: 5%;
+        padding: 10px 12px;
+        border-left: 4px solid #fff;
+        color: #ffffff;
+        transform: translateX(0);
+    }
+
+    .single-content .info h2 {
+        text-transform: uppercase;
+        letter-spacing: 3px;
+        font-weight: bold;
+        font-size: 18px;
+        margin-top: 15px;
+    }
+
+    .single-content .info h2,
+    .single-content .info p {
+        transform: translateX(0);
+    }
+
+    .single-content .info p {
+        font-size: 10px;
+        line-height: 17px;
+    }
+
+    .container {
+        justify-content: flex-start;
+        position: relative;
+    }
+
+    .button {
+        cursor: pointer;
+        background: none;
+        border: none;
+        border-radius: 5px;
+        font-size: 15px;
+        font-weight: 600;
+        color: white;
+        transition: all 0.3s ease;
+    }
+
+    .button:hover {
+        letter-spacing: 3px;
+    }
+
+    /* Responsive styles */
+    @media (max-width: 767px) {
+        .content-area {
+            width: 48%; /* Ensures two cards in a row */
+        }
+        .single-content {
+            width: 180px; /* Reduce width */
+            height: 180px; /* Reduce height */
+        }
+        .single-content .info {
+            padding: 6px 8px;
+            bottom: 3%;
+        }
+        .single-content .info h2 {
+            font-size: 15px; /* Reduce text size */
+            font-weight: bold;
+        }
+        .single-content img {
+        object-fit: cover;
+        
+        transition: all 0.5s ease;
+        width: 100%;
+        height: 100%;
+    }
+        .button {
+            font-size: 13px; /* Reduce button size */
+        }
+    }
+</style>
+
+
+
+<section>
+    <div class="container" style="margin-bottom: 50px; margin-top: 20px;">
+        <div class="row">
+            {% for product in products %}
+            <div class="content-area col-md-4 col-sm-6 mb-3 mt-3">
+                <div class="single-content">
+                    <img src="{{ product.image }}" alt="{{ product.heading }}" class="img-fluid rounded shadow-sm">
+                    <div class="info text-center mt-3">
+                        <h2 class="product-heading">{{ product.heading }}</h2>
+                        <button class="btn view-product-btn" 
+                                data-bs-toggle="modal" 
+                                data-bs-target="#productModal"
+                                data-heading="{{ product.heading }}"
+                                data-image="{{ product.image }}"
+                                data-cat="{{ product.cat }}"
+                                data-price="{{ product.price }}" style="font-size: 15px;border:1px solid white;color: white;">
+                            VIEW
+                        </button>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+<style>
+    /* Modal Custom Styling */
+    .custom-modal {
+        backdrop-filter: blur(16px) saturate(180%);
+    -webkit-backdrop-filter: blur(16px) saturate(180%);
+    background-color: rgba(17, 25, 40, 0.75);
+    
+    border: 1px solid rgba(255, 255, 255, 0.125);
+    border-radius: 12px;
+    box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.2);
+    }
+    
+    .modal-header {
+        backdrop-filter: blur(16px) saturate(180%);
+    -webkit-backdrop-filter: blur(16px) saturate(180%);
+    background-color: rgba(17, 25, 40, 0.75);
+    color: white;
+    border-top-left-radius: 12px;
+    border-top-right-radius: 12px;
+    }
+    
+    .modal-title {
+        font-weight: bold;
+    }
+    
+    .modal-body {
+        padding: 20px;
+    }
+    
+    #modalProductImage {
+        max-width: 100%;
+        height: 300px;
+        border-radius: 8px;
+        border: 2px solid #ddd;
+    }
+    
+    .modal-title-text {
+        font-size: 1.5rem;
+        color: #ffffff;
+        font-weight: bold;
+    }
+    
+    .modal-text {
+        font-size: 1rem;
+        color: #ffffff;
+    }
+    
+    .modal-footer {
+        border-top: none;
+        padding-bottom: 20px;
+    }
+    
+    .modal-btn {
+        padding: 10px 16px;
+        border-radius: 8px;
+        font-size: 1rem;
+        font-weight: bold;
+    }
+    
+    .modal-btn i {
+        margin-right: 5px;
+    }
+    </style>
+
+<!-- Bootstrap Modal for Products -->
+<div class="modal fade" id="productModal" tabindex="-1" aria-labelledby="productModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content custom-modal">
+            <div class="modal-header">
+                <h5 class="modal-title" id="productModalLabel">Product Details</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body text-center">
+                <img id="modalProductImage" src="" class="img-fluid mb-3 rounded shadow-sm" alt="Product Image">
+                <h4 id="modalProductHeading" class="modal-title-text"></h4>
+                <p class="modal-text"><strong>Category:</strong> <span id="modalProductCat"></span></p>
+                <p class="modal-text"><strong>Price:</strong> $<span id="modalProductPrice"></span></p>
+            </div>
+            <div class="modal-footer justify-content-center">
+                <a id="whatsappBtn" class="btn modal-btn" target="_blank" style="border:1px solid white;color:white;background: radial-gradient(circle, rgba(5,17,74,1) 0%, rgba(43,23,27,1) 100%);">
+                    <i class="fab fa-whatsapp"></i> Order on WhatsApp
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Bootstrap & FontAwesome for WhatsApp Icon -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+
+<!-- JavaScript for Modal Functionality -->
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+    document.querySelectorAll(".view-product-btn").forEach(button => {
+        button.addEventListener("click", function () {
+            // Get data attributes from button
+            const heading = this.getAttribute("data-heading");
+            const image = this.getAttribute("data-image");
+            const cat = this.getAttribute("data-cat");
+            const price = this.getAttribute("data-price");
+
+            // Set modal content
+            document.getElementById("modalProductHeading").textContent = heading;
+            document.getElementById("modalProductImage").src = image;
+            document.getElementById("modalProductCat").textContent = cat;
+            document.getElementById("modalProductPrice").textContent = price;
+
+            // Update WhatsApp button link
+            const message = `Hello, I'm interested in this product:\nHeading: ${heading}\nCategory: ${cat}\nPrice: ${price}`;
+            const encodedMessage = encodeURIComponent(message);
+            document.getElementById("whatsappProductBtn").href = `https://wa.me/+917994631745?text=${encodedMessage}`;
+        });
+    });
+});
+</script>
+
+
+<!-- <section>
+    <div class="container" style="margin-bottom: 50px; margin-top: 20px;">
+        <div class="row">
+            <div class="content-area col-md-4 col-sm-6 mb-3 mt-3">
+                <div class="single-content">
+                    <img src="https://i.pinimg.com/736x/ed/56/e3/ed56e37634d64b8231d9155e9b0bce43.jpg" alt="">
+                    <div class="info">
+                        <h2>oracle</h2>
+                        <a href="">
+                            <button class="button">view</button>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="content-area col-md-4 col-sm-6 mb-3 mt-3">
+                <div class="single-content">
+                    <img src="https://i.pinimg.com/736x/f0/dd/9a/f0dd9aed1fa58007acea05a9e625f5ab.jpg" alt="">
+                    <div class="info">
+                        <h2>halo</h2>
+                        <a href="">
+                            <button class="button">VIEW</button>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="content-area col-md-4 col-sm-6 mb-3 mt-3">
+                <div class="single-content">
+                    <img src="https://i.pinimg.com/736x/f3/01/81/f30181cf4aa7b03b8ca0a627a97d4105.jpg" alt="">
+                    <div class="info">
+                        <h2>eyeballin</h2>
+                        <a href="">
+                            <button class="button">view</button>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="content-area col-md-4 col-sm-6 mb-3 mt-3">
+                <div class="single-content">
+                    <img src="https://i.pinimg.com/736x/45/e6/22/45e622a25c71588438cda6df2be246ac.jpg" alt="">
+                    <div class="info">
+                        <h2>lockedup</h2>
+                        <a href="">
+                            <button class="button">view</button>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="content-area col-md-4 col-sm-6 mb-3 mt-3">
+                <div class="single-content">
+                    <img src="https://i.pinimg.com/736x/5f/db/37/5fdb379ed769710cc37f03fcef3de367.jpg" alt="">
+                    <div class="info">
+                        <h2>chaos</h2>
+                        <a href="">
+                            <button class="button">view</button>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="content-area col-md-4 col-sm-6 mb-3 mt-3">
+                <div class="single-content">
+                    <img src="https://i.pinimg.com/736x/9e/ae/40/9eae403c3e3581130c7971adb4da67b7.jpg" alt="">
+                    <div class="info">
+                        <h2>gradient arts</h2>
+                        <a href="">
+                            <button class="button">VIEW</button>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section> -->
+<footer class="footer-section">
+    <div class="container">
+        <div class="footer-cta pt-5 pb-5">
+            <div class="row">
+                <div class="col-xl-4 col-md-4 mb-3">
+                    <div class="single-cta">
+                        
+                        <div class="cta-text" style="margin-top: 20px;">
+                            
+                            <h4>Find us</h4>
+                            <span>Foreign Languages Academy Gurukulam(F.L.A.G.)
+                              Near Nattakom Govt. College,
+                              Nattakom P.O.,
+                              Kottayam<br>Pincode : 68 60 13</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-xl-4 col-md-4 mb-3">
+                    <div class="single-cta">
+                       
+                        <div class="cta-text" style="margin-top: 20px;">
+                            <h4>Call us</h4>
+                            <span>+91 907 2222 911 ,</span>
+                            <span>+91 907 2222 933</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-4 col-md-4 mb-30">
+                    <div class="single-cta">
+                        
+                        <div class="cta-text" style="margin-top: 20px;">
+                            <h4>Mail us</h4>
+                            <span>info@flaggurukulam.com</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="footer-content pt-5 pb-5">
+            <div class="row">
+                <div class="col-xl-4 col-lg-4 mb-50">
+                    <div class="footer-widget">
+                
+                        <div class="footer-text" style="margin-top: 30px;">
+                            <p>The best German language institute In Kochi, Kottayam. F.L.A.G. Foreign Languages Academy Gurukulam, contrarily, has an inclusive training program that focuses on academic performance academically and cultural integration.</p>
+                        </div>
+                        <div class="footer-social-icon mb-4" style="margin-top: 30px;">
+                            <span>Follow us</span>
+                            <a href="https://www.facebook.com/lifeplannerstudies"><i class="fab fa-facebook-f text-light" style="background: rgb(170, 22, 22);"></i></a>
+                            <a href="https://x.com/i/flow/login?redirect_after_login=%2Flifeplannerktm"><i class="fab fa-twitter text-light" style="background: rgb(170, 22, 22);"></i></a>
+                            <a href="https://www.instagram.com/lifeplannerstudies/?hl=en"><i class="fab fa-instagram text-light" style="background: rgb(170, 22, 22);"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-4 col-lg-4 col-md-6 mb-30" style="display:flex;justify-content: center;align-items: center;margin-top: 30px;">
+                    <div class="footer-widget" >
+                        <div class="footer-widget-heading" style="margin-top: 30px;">
+                            <h4>Top Links</h4>
+                        </div>
+                        <ul>
+                            <li><a href="">Home</a></li>
+                            <li><a href="">Offers</a></li>
+                            <li><a href="">Courses</a></li>
+                            <li><a href="">Contact Us</a></li>
+                            
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-xl-4 col-lg-4 col-md-6 mb-50" style="display:flex;justify-content: center;align-items: center;">
+                    <h3 style="
+font-size: 2rem; 
+font-weight: bold; 
+background: linear-gradient(106deg, rgb(118, 40, 40) 0%, rgb(27, 37, 91) 63%, rgb(80, 29, 136) 100%);
+-webkit-background-clip: text; 
+-webkit-text-fill-color: transparent; 
+text-align: center;
+margin-top: 60px;
+">
+multiverse clothing
+</h3>
+
+                </div>
+            </div>
+           
+        </div>
+        <div class="copyright-area">
+            <div class="container">
+                <div class="row"  style="display:flex;justify-content: center;align-items: center;">
+                    <div class="col-xl-6 col-lg-6 text-center ">
+                        <div class="copyright-text" >
+                            <p>Copyright &copy; 2025, All Right Reserved flaggurukulam.com</p>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+        
+    </div>
+    
+</footer>
+<style>
+    ul {
+    margin: 0px;
+    padding: 0px;
+    
+}
+.footer-section {
+background: transparent;
+  position: relative;
+  margin-top: 120px;
+  
+}
+.footer-cta {
+  border-bottom: 1px solid #373636;
+}
+.single-cta i {
+  color: white;
+  font-size: 30px;
+  float: left;
+  margin-top: 8px;
+}
+.cta-text {
+  padding-left: 15px;
+  display: inline-block;
+}
+.cta-text h4 {
+  color: #ffffff;
+  font-size: 20px;
+  font-weight: 600;
+  margin-bottom: 2px;
+}
+.cta-text span {
+  color: #ffffff;
+  font-size: 15px;
+}
+.footer-content {
+  position: relative;
+  z-index: 2;
+}
+.footer-pattern img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 330px;
+  background-size: cover;
+  background-position: 100% 100%;
+}
+.footer-logo {
+  margin-bottom: 30px;
+}
+.footer-logo img {
+    max-width: 200px;
+}
+.footer-text p {
+  margin-bottom: 14px;
+  font-size: 14px;
+      color: white;
+  line-height: 28px;
+}
+.footer-social-icon span {
+  color: #ffffff;
+  display: block;
+  font-size: 20px;
+  font-weight: 700;
+  font-family: 'Poppins', sans-serif;
+  margin-bottom: 20px;
+}
+.footer-social-icon a {
+  color: #fff;
+  font-size: 16px;
+  margin-right: 15px;
+}
+.footer-social-icon i {
+  height: 40px;
+  width: 40px;
+  text-align: center;
+  line-height: 38px;
+  border-radius: 50%;
+}
+.facebook-bg{
+  background: #3B5998;
+}
+.twitter-bg{
+  background: #55ACEE;
+}
+.google-bg{
+  background: #DD4B39;
+}
+.footer-widget-heading h4 {
+  color: #fff;
+  font-size: 20px;
+  font-weight: 600;
+  margin-bottom: 40px;
+  position: relative;
+}
+.footer-widget-heading h4::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -15px;
+  height: 2px;
+  width: 50px;
+  background: #ff5e14;
+}
+.footer-widget ul li {
+  display: inline-block;
+  float: left;
+  width: 50%;
+  margin-bottom: 12px;
+}
+.footer-widget ul li a:hover{
+  color: #ffffff;
+}
+.footer-widget ul li a {
+  color: #ffffff;
+  text-transform: capitalize;
+}
+.subscribe-form {
+  position: relative;
+  overflow: hidden;
+}
+.subscribe-form input {
+  width: 100%;
+  padding: 14px 28px;
+  background: #2E2E2E;
+  border: 1px solid #2E2E2E;
+  color: #fff;
+}
+.subscribe-form button {
+    position: absolute;
+    right: 0;
+    background: #ff5e14;
+    padding: 13px 20px;
+    border: 1px solid #ff5e14;
+    top: 0;
+}
+.subscribe-form button i {
+  color: #fff;
+  font-size: 22px;
+  transform: rotate(-6deg);
+}
+.copyright-area{
+    
+  padding: 25px 0;
+  display:flex;
+}
+.copyright-text p {
+  margin: 0;
+  font-size: 14px;
+  color: #ffffff;
+}
+.copyright-text p a{
+  color: #ffffff;
+}
+.footer-menu li {
+  display: inline-block;
+  margin-left: 20px;
+}
+.footer-menu li:hover a{
+  color: #ffffff;
+}
+.footer-menu li a {
+  font-size: 14px;
+  color: #878787;
+}
+</style>
+
+  <!-- Bootstrap JS -->
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+ 
+   
+   <!-- Bootstrap JS -->
+   <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+   <!-- Include Swiper.js -->
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/flickity/2.3.0/flickity.pkgd.min.js"></script>
+
+<script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+
+<!-- Bootstrap JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

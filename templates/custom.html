@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Multiverse</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flickity/2.3.0/flickity.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <style>
+    @font-face {
+      font-family: myfont;
+      src: url(/static/LEMONMILK-Light.otf);
+    }
+
+    body {
+      background: linear-gradient(106deg, rgb(39, 16, 16) 0%, rgb(11, 14, 27) 63%, rgb(35, 11, 28) 100%);
+      background-size: cover;
+      color: #f8f9fa;
+      font-family: myfont;
+      font-weight: bold;
+      letter-spacing: 1px;
+    }
+
+    .navbar {
+      background: transparent;
+      padding: 0.5rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: fixed;
+      top: 0;
+      width: 100%;
+      z-index: 999;
+      transition: background 0.3s ease;
+    }
+
+    .navbar .nav-link {
+      color: #ffffff;
+      font-weight: 500;
+      margin: 10px;
+    }
+
+    .navbar .nav-link:hover {
+      color: #ff4757;
+    }
+
+    .navbar-toggler {
+      border-color: rgba(255, 255, 255, 0.1);
+    }
+
+    .navbar-brand {
+      font-weight: 500;
+      color: #ffffff;
+    }
+
+    .icon-menu {
+      --gap: 5px;
+      --height-bar: 2.5px;
+      --pos-y-bar-one: 0;
+      --pos-y-bar-three: 0;
+      --scale-bar: 1;
+      --rotate-bar-one: 0;
+      --rotate-bar-three: 0;
+      width: 25px;
+      display: flex;
+      flex-direction: column;
+      gap: var(--gap);
+      cursor: pointer;
+      position: relative;
+      margin-top: -1px;
+      margin-right: 10px;
+      display: none;
+    }
+
+    @media (max-width: 767px) {
+      .icon-menu {
+        display: flex;
+      }
+    }
+
+    .bar {
+      position: relative;
+      height: 3.2px;
+      width: 100%;
+      border-radius: .5rem;
+      background-color: #d6d6d6;
+    }
+
+    .bar--1 {
+      top: var(--pos-y-bar-one);
+      transform: rotate(var(--rotate-bar-one));
+      transition: top 200ms 100ms, transform 100ms;
+    }
+
+    .bar--2 {
+      transform: scaleX(var(--scale-bar));
+      transition: transform 150ms 100ms;
+    }
+
+    .bar--3 {
+      bottom: var(--pos-y-bar-three);
+      transform: rotate(var(--rotate-bar-three));
+      transition: bottom 200ms 100ms, transform 100ms;
+    }
+
+    .check-icon:checked + .icon-menu > .bar--1 {
+      transition: top 200ms, transform 200ms 100ms;
+    }
+
+    .check-icon:checked + .icon-menu > .bar--3 {
+      transition: bottom 200ms, transform 200ms 100ms;
+    }
+
+    .check-icon:checked + .icon-menu {
+      --pos-y-bar-one: calc(var(--gap) + var(--height-bar));
+      --pos-y-bar-three: calc(var(--gap) + var(--height-bar));
+      --scale-bar: 0;
+      --rotate-bar-one: 45deg;
+      --rotate-bar-three: -45deg;
+    }
+
+    @media (min-width: 768px) and (max-width: 1024px) {
+      .icon-menu {
+        display: block;
+      }
+
+      .bar {
+        position: relative;
+        height: 5px;
+        width: 100%;
+        border-radius: .5rem;
+        background-color: #d6d6d6;
+        margin: 2px;
+      }
+
+      .bar--1 {
+        top: var(--pos-y-bar-one);
+        transform: rotate(var(--rotate-bar-one));
+        transition: top 200ms 100ms, transform 100ms;
+      }
+
+      .bar--2 {
+        transform: scaleX(var(--scale-bar));
+        transition: transform 150ms 100ms;
+      }
+
+      .bar--3 {
+        bottom: var(--pos-y-bar-three);
+        transform: rotate(var(--rotate-bar-three));
+        transition: bottom 200ms 100ms, transform 100ms;
+      }
+
+      .check-icon:checked + .icon-menu > .bar--1 {
+        transition: top 200ms, transform 200ms 100ms;
+      }
+
+      .check-icon:checked + .icon-menu > .bar--3 {
+        transition: bottom 200ms, transform 200ms 100ms;
+      }
+
+      .check-icon:checked + .icon-menu {
+        --pos-y-bar-one: calc(var(--gap) + var(--height-bar));
+        --pos-y-bar-three: calc(var(--gap) + var(--height-bar));
+        --scale-bar: 0;
+        --rotate-bar-one: 45deg;
+        --rotate-bar-three: -45deg;
+      }
+    }
+
+    .form-container {
+      backdrop-filter: blur(18px) saturate(180%);
+      -webkit-backdrop-filter: blur(18px) saturate(180%);
+      background-color: rgba(18, 37, 73, 0.75);
+      padding: 20px;
+      width: 100%;
+      max-width: 600px;
+      border-radius: 15px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .form-container:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+    }
+
+    h2 {
+      text-align: center;
+      margin-bottom: 20px;
+      color: #ffffff;
+      font-size: 2rem;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    }
+
+    label {
+      font-weight: bold;
+      display: block;
+      margin: 10px 0 5px;
+      color: #ffffff;
+    }
+
+    input, select {
+      width: 100%;
+      padding: 10px;
+      border-radius: 5px;
+      border: 1px solid #6f6e6e;
+      background-color: rgba(0, 0, 0, 0.5);
+      color: #ffffff;
+      transition: border-color 0.3s ease, background-color 0.3s ease;
+    }
+
+    input:focus, select:focus {
+      border-color: #ff4757;
+      background-color: rgba(0, 0, 0, 0.7);
+      outline: none;
+    }
+
+    input[type="file"] {
+      border: none;
+      background-color: transparent;
+    }
+
+    .submit-btn {
+      background: linear-gradient(45deg, #ff4757, #ff6b81);
+      color: white;
+      padding: 12px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      width: 100%;
+      margin-top: 15px;
+      font-size: 1rem;
+      font-weight: bold;
+      transition: background 0.3s ease, transform 0.3s ease;
+    }
+
+    .submit-btn:hover {
+      background: linear-gradient(45deg, #ff6b81, #ff4757);
+      transform: scale(1.05);
+    }
+  </style>
+</head>
+<body>
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg navbar-dark">
+    <p class="text-center" style="font-weight: bold;font-size: 1.5rem;margin-left: 15px;margin-top: 10px;"> our designs</p>
+    <input hidden class="check-icon" id="check-icon" name="check-icon" type="checkbox">
+    <label class="icon-menu" for="check-icon" data-toggle="collapse" data-target="#navbarNav">
+      <div class="bar bar--1"></div>
+      <div class="bar bar--2"></div>
+      <div class="bar bar--3"></div>
+    </label>
+
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav ml-auto">
+        <li class="nav-item ml-4"><a class="nav-link" href="">Products</a></li>
+        <li class="nav-item ml-4"><a class="nav-link" href="">Custom</a></li>
+        <li class="nav-item ml-4"><a class="nav-link" href="">Contact Us</a></li>
+        <li class="nav-item ml-4"><a class="nav-link" href="">Designs</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <script>
+    // Navbar background color change on scroll or menu toggle
+function updateNavbarBackground() {
+  const navbar = document.querySelector(".navbar");
+  const menuCheckbox = document.querySelector("#check-icon");
+
+  if (menuCheckbox.checked || window.scrollY > 50) {
+    navbar.style.background = "rgba(0, 0, 0, 0.363)"; // Light transparent background for contrast
+    navbar.style.backdropFilter = "blur(10px)";
+    navbar.style.webkitBackdropFilter = "blur(10px)";
+    navbar.style.transition = "background 0.3s ease, backdrop-filter 0.3s ease"; // Smooth transition
+  } else {
+    navbar.style.background = "transparent";
+    navbar.style.backdropFilter = "none";
+    navbar.style.webkitBackdropFilter = "none";
+  }
+}
+
+// Attach scroll event listener
+window.addEventListener("scroll", updateNavbarBackground);
+
+// Attach toggle menu listener
+document.querySelector("#check-icon").addEventListener("change", updateNavbarBackground);
+
+  </script>
+<div style="padding:20px;">
+  <div style="display:flex;align-items: center;justify-content: center;background: ;">
+    <div class="form-container" style="margin-top: 100px;">
+     
+      <form id="customProductForm">
+        <!-- Upload Design -->
+        <label for="designImage">Upload Your Design:</label>
+        <input type="file" id="designImage" accept="image/*" required>
+<br><br>
+        <!-- Select Fit -->
+        <label for="fit">Select Fit:</label>
+        <select id="fit" required style="background:rgba(0,0,0,0.5);">
+          <option value="">-- Choose Fit --</option>
+          <option value="Baggy">Baggy</option>
+          <option value="Regular">Regular</option>
+          <option value="Drop Shoulder">Drop Shoulder</option>
+        </select>
+
+        <!-- Select Color -->
+        <label for="color">Choose Color:</label>
+        <input type="text" id="colorText" placeholder="Click to select a color" readonly onclick="openColorPopup()">
+
+        <!-- Select Size -->
+        <label for="size">Select Size:</label>
+        <select id="size" required>
+          <option value="">-- Choose Size --</option>
+          <option value="S">Small (S)</option>
+          <option value="M">Medium (M)</option>
+          <option value="L">Large (L)</option>
+          <option value="XL">Extra Large (XL)</option>
+          <option value="XXL">Double XL (XXL)</option>
+        </select>
+
+        <!-- Submit Button -->
+        <button type="submit" class="submit-btn">Submit Request</button>
+      </form>
+      <style>
+      
+        .outer-cont {
+            margin-top: 2rem;
+          padding: 12px 20px;
+          border: none;
+          font-size: 1rem;
+          cursor: pointer;
+          position: relative;
+          background: linear-gradient(90deg, #17805b, #8436b5, #71a4f0);
+          border-radius: 8px;
+          color: #fff;
+          transition: all 0.3s ease;
+          box-shadow:
+            inset 0px 0px 5px #ffffffa9,
+            inset 0px 35px 30px #000,
+            0px 5px 10px #000000cc;
+          text-shadow: 1px 1px 1px #000;
+        }
+        .outer-cont::before {
+          content: "";
+          position: absolute;
+          inset: 0;
+          margin: auto;
+          border-radius: 12px;
+          filter: blur(0);
+          z-index: -1;
+          box-shadow: none;
+          background: conic-gradient(
+            #00000000 80deg,
+            #40baf7,
+            #4e1544,
+            #27624d,
+            #00000000 280deg
+          );
+          transition: all 0.3s ease;
+        }
+        .outer-cont:hover::before {
+          filter: blur(15px);
+        }
+        .outer-cont:active::before {
+          filter: blur(5px);
+          transform: translateY(1px);
+        }
+        .outer-cont:active {
+          box-shadow:
+            inset 0px 0px 5px #ffffffa9,
+            inset 0px 35px 30px #000;
+          margin-top: 3px;
+        }
+        
+            </style>
+            <!-- From Uiverse.io by Spacious74 --> 
+        <div class="outer-cont flex" style="display: flex;justify-content: center;align-items: center;">
+           
+            message
+            <img src="/static/whatsapp.svg" style="width:2rem;margin-left: 10px;margin-top: 3px;">
+          </div>
+    </div>
+   
+  
+  </div>
+ <!-- Color Popup -->
+ <div class="color-popup" id="colorPopup">
+    <h3>Select a Color</h3>
+    <div class="color-options">
+        <div class="color-box" style="background: black;" onclick="selectColor('Black', '#000000')"></div>
+        <div class="color-box" style="background: white; border: 1px solid #ccc;" onclick="selectColor('White', '#FFFFFF')"></div>
+        <div class="color-box" style="background: red;" onclick="selectColor('Red', '#FF0000')"></div>
+        <div class="color-box" style="background: blue;" onclick="selectColor('Blue', '#0000FF')"></div>
+        <div class="color-box" style="background: green;" onclick="selectColor('Green', '#008000')"></div>
+        <div class="color-box" style="background: yellow;" onclick="selectColor('Yellow', '#FFFF00')"></div>
+        <div class="color-box" style="background: gray;" onclick="selectColor('Gray', '#808080')"></div>
+        <div class="color-box" style="background: brown;" onclick="selectColor('Brown', '#A52A2A')"></div>
+    </div>
+    <button class="close-popup" onclick="closeColorPopup()">Close</button>
+</div>
+</div>
+<style>
+    .color-popup {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(0, 0, 0);
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+            width: 280px;
+            text-align: center;
+        }
+
+        .color-popup h3 {
+            margin-bottom: 10px;
+        }
+
+        .color-options {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .color-box {
+            width: 40px;
+            height: 40px;
+            margin: 5px;
+            border-radius: 5px;
+            cursor: pointer;
+            border: 2px solid white;
+        }
+
+        .color-box:hover {
+            border: 2px solid #000;
+        }
+
+        .close-popup {
+            background: red;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+    </style>
+<script>
+    function openColorPopup() {
+        document.getElementById("colorPopup").style.display = "block";
+    }
+
+    function closeColorPopup() {
+        document.getElementById("colorPopup").style.display = "none";
+    }
+
+    function selectColor(name, hex) {
+        document.getElementById("colorText").value = name;
+        document.getElementById("colorText").style.background = hex;
+        document.getElementById("colorText").style.color = (hex === "#FFFFFF") ? "black" : "white";
+        closeColorPopup();
+    }
+
+    document.getElementById("customProductForm").addEventListener("submit", function(event) {
+        event.preventDefault();
+
+        const fileInput = document.getElementById("designImage").files[0];
+        const fit = document.getElementById("fit").value;
+        const color = document.getElementById("colorText").value;
+        const size = document.getElementById("size").value;
+
+        if (!fileInput) {
+            alert("Please upload a design.");
+            return;
+        }
+
+        if (!fit || !size || !color) {
+            alert("Please select fit, color, and size.");
+            return;
+        }
+
+        alert("Custom request submitted successfully!");
+    });
+</script>
+  <script>
+    document.getElementById("customProductForm").addEventListener("submit", function(event) {
+      event.preventDefault(); // Prevent default form submission
+
+      const fileInput = document.getElementById("designImage").files[0];
+      const fit = document.getElementById("fit").value;
+      const color = document.getElementById("color").value;
+      const size = document.getElementById("size").value;
+
+      if (!fileInput) {
+        alert("Please upload a design.");
+        return;
+      }
+
+      if (!fit || !size) {
+        alert("Please select fit and size.");
+        return;
+      }
+
+      // Simulating Form Submission (Replace with backend logic)
+      alert("Custom request submitted successfully!");
+    });
+  </script>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/flickity/2.3.0/flickity.pkgd.min.js"></script>
+  <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
