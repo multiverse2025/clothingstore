@@ -18,7 +18,6 @@ def design_detail(request, product_id):
 def custom(request):
     return render (request ,"custom.html")
 
-
 def products(request):
     all_products = Products.objects.all()  
     return render (request,"products.html",{"products":all_products})
