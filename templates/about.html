@@ -282,15 +282,16 @@ a {
       <p style="color: #818181; font-size: smaller">2024 © All Rights Reserved</p>
     </div>
     <div class="col col2 ">
-      <p><a href="">HOME</a></p>
+      <p><a href="{% url 'multiverseapp:home' %}">HOME</a></p>
       <p<a href="tel:+91 90747 60272">CALL US</a></p>
-      <p>PRIVACY POLICIES</p>
+      <a href="https://www.instagram.com/multiverse_clothing?igsh=MTU5anlnbzZpa3B3ag==">
       <p>SOCIALS</p>
+    </a>
     </div>
     <div class="col col3">
       <p>CUSTOM SERVICE</p>
-      <p><a href="">PRODUCTS</a></p>
-      <p><a href="">DESIGNS</a></p>
+      <p><a href="{% url 'multiverseapp:products' %}">PRODUCTS</a></p>
+      <p><a href="{% url 'multiverseapp:designs' %}">DESIGNS</a></p>
       <p><a href="#top">BACK TO TOP</a></p>
     </div>
     <div class="backdrop"></div>
