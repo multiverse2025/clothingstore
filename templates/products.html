@@ -200,10 +200,10 @@
 
     <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav ml-auto" >
-            <li class="nav-item ml-4"><a class="nav-link" href="">Products</a></li>
-            <li class="nav-item ml-4"><a class="nav-link" href="">Custom</a></li>
-            <li class="nav-item ml-4"><a class="nav-link" href="">Contact Us</a></li>
-            <li class="nav-item ml-4"><a class="nav-link" href="">Designs</a></li>
+          <li class="nav-item ml-4"><a class="nav-link" href="{% url 'multiverseapp:products' %}">Products</a></li>
+          <li class="nav-item ml-4"><a class="nav-link" href="{% url 'multiverseapp:custom' %}">Custom</a></li>
+          <li class="nav-item ml-4"><a class="nav-link" href="tel:+91 90747 60272">Contact Us</a></li>
+          <li class="nav-item ml-4"><a class="nav-link" href="{% url 'multiverseapp:designs' %}">Designs</a></li>
 
         </ul>
     </div>
@@ -237,6 +237,8 @@ document.querySelector("#check-icon").addEventListener("change", updateNavbarBac
 <div style="display:flex;align-items:center;justify-content: center;margin-top: 100px;margin-bottom: 40px;">
     <style>
         .grid {
+          height: 400%;
+          width:98vw;
  
   
   background-image: linear-gradient(to right, #0f0f10 1px, transparent 1px),
