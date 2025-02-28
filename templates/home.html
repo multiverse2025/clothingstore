@@ -267,6 +267,11 @@ document.querySelector("#check-icon").addEventListener("change", updateNavbarBac
 </header>
 
 <style>
+   @font-face {
+            font-family: mifont;
+            src: url(/static/LEMONMILK-Regular.otf);
+        }
+
   .overlay {
     position: absolute;
     top: 0;
@@ -281,8 +286,9 @@ document.querySelector("#check-icon").addEventListener("change", updateNavbarBac
   top: 20%; /* Start position below */
   left: 40%;
   transform: translate(-50%, 0); /* Center horizontally */
-  color: white;
+  color: rgba(255, 255, 255, 0.326);
   font-size:11rem;
+  font-family: mifont;
   font-weight: bold;
   text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.7);
   opacity: 0;
