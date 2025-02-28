@@ -261,21 +261,32 @@ document.querySelector("#check-icon").addEventListener("change", updateNavbarBac
 
   </script>
 <header style="position: relative; width: 100%; height: auto;">
+  <div class="overlay"></div>
   <img src="/static/x7.jpg" style="width: 100%; display: block;">
   <div class="animated-text">MULTIVERSE<br>got u now</div>
 </header>
 
 <style>
+  .overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7); /* 50% opacity black */
+    z-index: 1;
+}
 .animated-text {
   position: absolute;
-  top: 30%; /* Start position below */
-  left: 50%;
+  top: 20%; /* Start position below */
+  left: 40%;
   transform: translate(-50%, 0); /* Center horizontally */
   color: white;
-  font-size: 9rem;
+  font-size:11rem;
   font-weight: bold;
   text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.7);
   opacity: 0;
+  z-index: 2;
   white-space: nowrap; /* Prevents text from wrapping */
   animation: slideInUp 2s ease-in-out forwards;
 }
@@ -295,7 +306,7 @@ document.querySelector("#check-icon").addEventListener("change", updateNavbarBac
 /* Responsive Adjustments */
 @media (max-width: 768px) {
   .animated-text {
-      font-size: 2.7rem;
+      font-size: 3rem;
       top: 45%; /* Adjust position for smaller screens */
       font-weight: bold;
   }
