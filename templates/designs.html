@@ -202,10 +202,10 @@
 
     <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav ml-auto" >
-          <li class="nav-item ml-4"><a class="nav-link" href="{% url 'multiverseapp:products' %}">Products</a></li>
+          <li class="nav-item ml-4"><a class="nav-link" href="{% url 'multiverseapp:home' %}">Home</a></li>
           <li class="nav-item ml-4"><a class="nav-link" href="{% url 'multiverseapp:custom' %}">Custom</a></li>
           <li class="nav-item ml-4"><a class="nav-link" href="tel:+91 90747 60272">Contact Us</a></li>
-          <li class="nav-item ml-4"><a class="nav-link" href="{% url 'multiverseapp:designs' %}">Designs</a></li>
+          <li class="nav-item ml-4"><a class="nav-link" href="{% url 'multiverseapp:products' %}">Products</a></li>
 
         </ul>
     </div>
@@ -253,7 +253,9 @@ document.querySelector("#check-icon").addEventListener("change", updateNavbarBac
           <div class="carousel-cell" style="background-image: url(https://i.pinimg.com/736x/0d/e3/ec/0de3ecb530fa071415827932fe2bcbcb.jpg);">
               <div class="carousel-info">
                   <h4>Products</h4>
-                  <button class="carousel-button">View</button>
+                  <a href="{% url 'multiverseapp:products' %}">
+                    <button class="carousel-button">View</button>
+                  </a>
               </div>
           </div>
       
@@ -261,7 +263,9 @@ document.querySelector("#check-icon").addEventListener("change", updateNavbarBac
           <div class="carousel-cell" style="background-image: url(https://i.pinimg.com/736x/22/d1/14/22d1140e2a683ae8bc564818d81614b0.jpg);">
               <div class="carousel-info">
                   <h4>Custom</h4>
+                  <a href="{% url 'multiverseapp:custom' %}">
                   <button class="carousel-button">View</button>
+                </a>
               </div>
           </div>
       
@@ -269,7 +273,9 @@ document.querySelector("#check-icon").addEventListener("change", updateNavbarBac
           <div class="carousel-cell" style="background-image: url(/static/mc5.jpg);">
               <div class="carousel-info">
                 <h4>about us</h4>
-                <button class="carousel-button">View </button>
+                <a href="{% url 'multiverseapp:about' %}">
+                  <button class="carousel-button">View</button>
+                </a>
               </div>
           </div>
       </div>
@@ -1111,16 +1117,14 @@ document.addEventListener("DOMContentLoaded", function () {
                 document.getElementById("modalTag").textContent = tag;
                 document.getElementById("modalPrice").textContent = price;
     
-                // Update WhatsApp button link
-                const message = `Hello, I'm interested in this design:\nTitle: ${title}\nTag: ${tag}\nPrice: ${price}`;
-                const encodedMessage = encodeURIComponent(message);
-                document.getElementById("whatsappBtn").href = `https://wa.me/+917994631745?text=${encodedMessage}`;
-            });
+                const message = `Hello, I'm interested in this product:\nProduct: ${heading}\nCategory: ${cat}\nPrice: ${price}`;
+              const encodedMessage = encodeURIComponent(message);
+              document.getElementById("whatsappBtn").href = `https://wa.me/+919048011906?text=${encodedMessage}`;
         });
     });
     </script>
 
-<!-- <div style="display:flex;justify-content: center;align-items: center;margin: 10px;margin-top: -20px;
+<div style="display:flex;justify-content: center;align-items: center;margin: 10px;margin-top: -20px;
 background: linear-gradient(106deg, rgb(183, 24, 24) 0%, rgb(14, 43, 203) 63%, rgb(98, 31, 169) 100%);
 -webkit-background-clip: text; 
 -webkit-text-fill-color: transparent; 
@@ -1132,14 +1136,20 @@ text-align: center;">
 
 
 <div style="display:flex;justify-content: center;align-items: center;margin: 10px;margin-top: -20px;
-background: linear-gradient(106deg, rgb(183, 24, 24) 0%, rgb(14, 43, 203) 63%, rgb(98, 31, 169) 100%);
--webkit-background-clip: text; 
--webkit-text-fill-color: transparent; 
-text-align: center;">
-    <i class="fa-solid fa-envelope" style="color:white;font-size: 40px;margin: 20px;"></i>
-    <i class="fa-brands fa-whatsapp" style="color:white;font-size: 40px;margin: 20px;"></i>
-    <i class="fa-solid fa-phone" style="color:white;font-size: 35px;margin: 20px;"></i>
-</div>
+            background: linear-gradient(106deg, rgb(183, 24, 24) 0%, rgb(14, 43, 203) 63%, rgb(98, 31, 169) 100%);
+  -webkit-background-clip: text; 
+  -webkit-text-fill-color: transparent; 
+  text-align: center;">
+  <a href="mailto:multiverseclothings@gmail.com">
+                <i class="fa-solid fa-envelope" style="color:white;font-size: 40px;margin: 20px;"></i>
+              </a>
+              <a href="https://wa.me/9048011906">
+                <i class="fa-brands fa-whatsapp" style="color:white;font-size: 40px;margin: 20px;"></i>
+              </a>
+              <a href="tel:+919048011906">
+                <i class="fa-solid fa-phone" style="color:white;font-size: 35px;margin: 20px;"></i>
+              </a>
+            </div>
 <footer class="footer-section">
     <div class="container">
         <div class="footer-cta pt-5 pb-5">
@@ -1160,7 +1170,7 @@ text-align: center;">
                        
                         <div class="cta-text" style="margin-top: 20px;">
                             <h4>Call us</h4>
-                            <span>+91 907 4760 272</span>
+                            <span>+919048011906</span>
                             
                         </div>
                     </div>
@@ -1195,10 +1205,10 @@ text-align: center;">
                             <h4>Top Links</h4>
                         </div>
                         <ul>
-                            <li><a href="">top</a></li>
-                            <li><a href="">designs</a></li>
-                            <li><a href="">custom</a></li>
-                            <li><a href="">Contact Us</a></li>
+                            <li><a href="#">top</a></li>
+                            <li><a href="{% url 'multiverseapp:products' %}">products</a></li>
+                            <li><a href="{% url 'multiverseapp:custom' %}">custom</a></li>
+                            <li><a href="tel:+919048011906">Contact Us</a></li>
                             
                         </ul>
                     </div>

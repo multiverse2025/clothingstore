@@ -259,10 +259,10 @@
 
     <div class="collapse navbar-collapse" id="navbarNav">
       <ul class="navbar-nav ml-auto">
-        <li class="nav-item ml-4"><a class="nav-link" href="{% url 'multiverseapp:products' %}">Products</a></li>
-            <li class="nav-item ml-4"><a class="nav-link" href="{% url 'multiverseapp:custom' %}">Custom</a></li>
-            <li class="nav-item ml-4"><a class="nav-link" href="tel:+91 90747 60272">Contact Us</a></li>
-            <li class="nav-item ml-4"><a class="nav-link" href="{% url 'multiverseapp:designs' %}">Designs</a></li>
+        <li class="nav-item ml-4"><a class="nav-link" href="{% url 'multiverseapp:home' %}">Home</a></li>
+          <li class="nav-item ml-4"><a class="nav-link" href="{% url 'multiverseapp:designs' %}">Designs</a></li>
+          <li class="nav-item ml-4"><a class="nav-link" href="tel:+91 90747 60272">Contact Us</a></li>
+          <li class="nav-item ml-4"><a class="nav-link" href="{% url 'multiverseapp:products' %}">Products</a></li>
       </ul>
     </div>
   </nav>
@@ -381,11 +381,13 @@ document.querySelector("#check-icon").addEventListener("change", updateNavbarBac
         
             </style>
             <!-- From Uiverse.io by Spacious74 --> 
-        <div class="outer-cont flex" style="display: flex;justify-content: center;align-items: center;">
-           
-            message
-            <img src="/static/whatsapp.svg" style="width:2rem;margin-left: 10px;margin-top: 3px;">
-          </div>
+            <a href="https://wa.me/+919048011906" target="_blank" style="text-decoration: none; color: inherit;">
+              <div class="outer-cont flex" style="display: flex; justify-content: center; align-items: center;">
+                  message
+                  <img src="/static/whatsapp.svg" style="width: 2rem; margin-left: 10px; margin-top: 3px;">
+              </div>
+          </a>
+          
     </div>
    
   

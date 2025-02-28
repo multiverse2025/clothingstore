@@ -200,7 +200,7 @@
 
     <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav ml-auto" >
-          <li class="nav-item ml-4"><a class="nav-link" href="{% url 'multiverseapp:products' %}">Products</a></li>
+          <li class="nav-item ml-4"><a class="nav-link" href="{% url 'multiverseapp:home' %}">Home</a></li>
           <li class="nav-item ml-4"><a class="nav-link" href="{% url 'multiverseapp:custom' %}">Custom</a></li>
           <li class="nav-item ml-4"><a class="nav-link" href="tel:+91 90747 60272">Contact Us</a></li>
           <li class="nav-item ml-4"><a class="nav-link" href="{% url 'multiverseapp:designs' %}">Designs</a></li>
@@ -983,30 +983,30 @@ document.querySelector("#check-icon").addEventListener("change", updateNavbarBac
 
 <!-- JavaScript for Modal Functionality -->
 <script>
-document.addEventListener("DOMContentLoaded", function () {
-    document.querySelectorAll(".view-product-btn").forEach(button => {
-        button.addEventListener("click", function () {
-            // Get data attributes from button
-            const heading = this.getAttribute("data-heading");
-            const image = this.getAttribute("data-image");
-            const cat = this.getAttribute("data-cat");
-            const price = this.getAttribute("data-price");
-
-            // Set modal content
-            document.getElementById("modalProductHeading").textContent = heading;
-            document.getElementById("modalProductImage").src = image;
-            document.getElementById("modalProductCat").textContent = cat;
-            document.getElementById("modalProductPrice").textContent = price;
-
-            // Update WhatsApp button link
-            const message = `Hello, I'm interested in this product:\nHeading: ${heading}\nCategory: ${cat}\nPrice: ${price}`;
-            const encodedMessage = encodeURIComponent(message);
-            document.getElementById("whatsappProductBtn").href = `https://wa.me/+917994631745?text=${encodedMessage}`;
-        });
-    });
-});
-</script>
-
+  document.addEventListener("DOMContentLoaded", function () {
+      document.querySelectorAll(".view-product-btn").forEach(button => {
+          button.addEventListener("click", function () {
+              // Get data attributes from button
+              const heading = this.getAttribute("data-heading");
+              const image = this.getAttribute("data-image");
+              const cat = this.getAttribute("data-cat");
+              const price = this.getAttribute("data-price");
+  
+              // Set modal content
+              document.getElementById("modalProductHeading").textContent = heading;
+              document.getElementById("modalProductImage").src = image;
+              document.getElementById("modalProductCat").textContent = cat;
+              document.getElementById("modalProductPrice").textContent = price;
+  
+              // Update WhatsApp button link (Fixed ID)
+              const message = `Hello, I'm interested in this product:\nProduct: ${heading}\nCategory: ${cat}\nPrice: ${price}`;
+              const encodedMessage = encodeURIComponent(message);
+              document.getElementById("whatsappBtn").href = `https://wa.me/+919048011906?text=${encodedMessage}`;
+          });
+      });
+  });
+  </script>
+  
 
 <!-- <section>
     <div class="container" style="margin-bottom: 50px; margin-top: 20px;">
@@ -1087,9 +1087,15 @@ background: linear-gradient(106deg, rgb(183, 24, 24) 0%, rgb(14, 43, 203) 63%, r
 -webkit-background-clip: text; 
 -webkit-text-fill-color: transparent; 
 text-align: center;">
+<a href="mailto:multiverseclothings@gmail.com">
     <i class="fa-solid fa-envelope" style="color:white;font-size: 40px;margin: 20px;"></i>
+  </a>
+  <a href="https://wa.me/9048011906">
     <i class="fa-brands fa-whatsapp" style="color:white;font-size: 40px;margin: 20px;"></i>
+  </a>
+  <a href="tel:+919048011906">
     <i class="fa-solid fa-phone" style="color:white;font-size: 35px;margin: 20px;"></i>
+  </a>
 </div>
 <footer class="footer-section">
     <div class="container">
@@ -1111,7 +1117,7 @@ text-align: center;">
                        
                         <div class="cta-text" style="margin-top: 20px;">
                             <h4>Call us</h4>
-                            <span>+91 907 4760 272</span>
+                            <span>+919048011906</span>
                             
                         </div>
                     </div>
@@ -1146,12 +1152,12 @@ text-align: center;">
                             <h4>Top Links</h4>
                         </div>
                         <ul>
-                            <li><a href="">top</a></li>
-                            <li><a href="">designs</a></li>
-                            <li><a href="">custom</a></li>
-                            <li><a href="">Contact Us</a></li>
-                            
-                        </ul>
+                          <li><a href="#">top</a></li>
+                          <li><a href="{% url 'multiverseapp:designs' %}">designs</a></li>
+                          <li><a href="{% url 'multiverseapp:custom' %}">custom</a></li>
+                          <li><a href="tel:+919048011906">Contact Us</a></li>
+                          
+                      </ul>
                     </div>
                 </div>
                 <div class="col-xl-4 col-lg-4 col-md-6 mb-50" style="display:flex;justify-content: center;align-items: center;">

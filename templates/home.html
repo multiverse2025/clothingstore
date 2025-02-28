@@ -260,9 +260,50 @@ window.addEventListener("scroll", updateNavbarBackground);
 document.querySelector("#check-icon").addEventListener("change", updateNavbarBackground);
 
   </script>
-<header >
-    <img src="/static/x7.jpg" style="width:100%;">
+<header style="position: relative; width: 100%; height: auto;">
+  <img src="/static/x7.jpg" style="width: 100%; display: block;">
+  <div class="animated-text">MULTIVERSE<br>got u now</div>
 </header>
+
+<style>
+.animated-text {
+  position: absolute;
+  top: 30%; /* Start position below */
+  left: 50%;
+  transform: translate(-50%, 0); /* Center horizontally */
+  color: white;
+  font-size: 9rem;
+  font-weight: bold;
+  text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.7);
+  opacity: 0;
+  white-space: nowrap; /* Prevents text from wrapping */
+  animation: slideInUp 2s ease-in-out forwards;
+}
+
+/* Animation - Move text from bottom to center */
+@keyframes slideInUp {
+  0% {
+      opacity: 0;
+      transform: translate(-50%, 100px); /* Start from below */
+  }
+  100% {
+      opacity: 1;
+      transform: translate(-50%, 0); /* Move to center */
+  }
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+  .animated-text {
+      font-size: 2.7rem;
+      top: 45%; /* Adjust position for smaller screens */
+      font-weight: bold;
+  }
+}
+</style>
+
+
+
 
 
 
@@ -702,9 +743,15 @@ document.querySelector("#check-icon").addEventListener("change", updateNavbarBac
   -webkit-background-clip: text; 
   -webkit-text-fill-color: transparent; 
   text-align: center;">
+  <a href="mailto:multiverseclothings@gmail.com">
                 <i class="fa-solid fa-envelope" style="color:white;font-size: 40px;margin: 20px;"></i>
+              </a>
+              <a href="https://wa.me/9048011906">
                 <i class="fa-brands fa-whatsapp" style="color:white;font-size: 40px;margin: 20px;"></i>
+              </a>
+              <a href="tel:+919048011906">
                 <i class="fa-solid fa-phone" style="color:white;font-size: 35px;margin: 20px;"></i>
+              </a>
             </div>
             <footer class="footer-section">
                 <div class="container">
@@ -726,7 +773,7 @@ document.querySelector("#check-icon").addEventListener("change", updateNavbarBac
                                    
                                     <div class="cta-text" style="margin-top: 20px;">
                                         <h4>Call us</h4>
-                                        <span>+91 907 4760 272</span>
+                                        <span>+919048011906</span>
                                         
                                     </div>
                                 </div>
