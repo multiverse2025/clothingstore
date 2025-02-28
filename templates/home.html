@@ -294,18 +294,18 @@ document.querySelector("#check-icon").addEventListener("change", updateNavbarBac
   opacity: 0;
   z-index: 2;
   white-space: nowrap; /* Prevents text from wrapping */
-  animation: slideInUp 2s ease-in-out forwards;
+  animation: slideInUp 1.5s ease-in-out forwards;
 }
 
 /* Animation - Move text from bottom to center */
 @keyframes slideInUp {
   0% {
       opacity: 0;
-      transform: translate(-50%, 100px); /* Start from below */
+      filter: blur(10px); /* Start with heavy blur */
   }
   100% {
       opacity: 1;
-      transform: translate(-50%, 0); /* Move to center */
+      filter: blur(0); /* Clear blur */
   }
 }
 
